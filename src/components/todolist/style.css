@@ -1,0 +1,19 @@
+#list-container {
+    padding: 2rem;
+    margin-top: 0;
+}
+
+#list-container + div {
+    display: flex;
+    
+}
+
+#date {
+    margin: 0;
+    float: right;
+    
+}
+#list {
+    margin-top: 2rem;
+    width: 100%;
+}

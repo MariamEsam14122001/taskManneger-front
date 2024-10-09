@@ -1,0 +1,20 @@
+#sidebar{
+    width: 23%;
+    height: 100%;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 1740px) { 
+    #sidebar {
+        width: 30%; 
+    }
+}
+@media (max-width: 1120px) { 
+    #sidebar {
+        width: 50%; 
+    }
+}
+@media (max-width: 768px) { 
+    #sidebar {
+        width: 100%; 
+    }
+}

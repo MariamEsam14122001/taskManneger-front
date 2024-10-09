@@ -1,0 +1,15 @@
+#info{
+    display: flex;
+    padding: 2rem;
+    margin-bottom: 0;
+}
+
+#info div{
+    margin-left: 2rem;
+    margin-right: 2rem;
+    align-items: center;
+    align-content: center;
+}
+#notf{
+    margin-left: auto;
+}
