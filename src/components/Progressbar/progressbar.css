@@ -1,0 +1,109 @@
+/* Main container for the progress bar */
+.progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; /* Take up the full width */
+    max-width: 600px;
+    margin: 20px 0;
+    padding: 10px 0;
+    box-sizing: border-box;
+    flex-wrap: wrap; /* Allow elements to wrap if needed */
+}
+
+/* Task meter labels (Task Meter and 25/50) */
+.task-meter {
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.task-label {
+    font-weight: bold;
+}
+
+.task-progress {
+    color: #007bff; /* Color for the progress numbers */
+    font-weight: bold;
+}
+
+/* Progress bar container */
+.progress-bar {
+    flex-grow: 1;
+    height: 8px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    margin: 0 20px;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Ensure minimum width on small screens */
+}
+
+/* The blue fill of the progress bar */
+.progress-fill {
+    height: 100%;
+    background-color: #007bff;
+    border-radius: 5px 0 0 5px;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Good job text and icon */
+.good-job {
+    display: flex;
+    align-items: center;
+    color: #f1c40f;
+    font-weight: bold;
+}
+
+.star-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.good-job-text {
+    font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .progress-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .progress-bar {
+        width: 50%;
+        margin: 10px 0;
+    }
+
+    .good-job {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .task-meter {
+        font-size: 14px; /* Decrease font size on very small screens */
+        flex-direction: column; /* Stack labels on smaller screens */
+        align-items: center;
+    }
+
+    .task-label,
+    .task-progress {
+        margin-bottom: 5px; /* Add some spacing between label and progress */
+    }
+
+    .progress-bar {
+        margin: 10px 0;
+        height: 6px; /* Slightly reduce the height for small screens */
+    }
+
+    .good-job-text {
+        font-size: 14px; /* Decrease font size for smaller devices */
+    }
+
+    .good-job {
+        margin-top: 15px;
+    }
+}

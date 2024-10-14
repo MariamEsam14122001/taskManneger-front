@@ -1,0 +1,158 @@
+/* Main Task Board container */
+.task-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 20px; /* Space between columns */
+    padding: 30px;
+    margin-top: 5vh; /* 30% from the top of the page */
+    box-sizing: border-box;
+}
+
+.column-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    }
+.column-header.todo {
+    border-bottom-color: purple;
+    }
+.column-header.inprogress {
+    border-bottom-color: orange;
+    }
+.column-header.done {
+    border-bottom-color: green;
+    }
+
+
+/* Card styling */
+.card {
+    background-color: rgb(250, 244, 244);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Card header with title and status dot */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.status-dot.todo {
+    background-color: purple;
+}
+
+.status-dot.inprogress {
+    background-color: orange;
+}
+
+.status-dot.done {
+    background-color: green;
+}
+
+/* Three dots menu */
+.three-dots-menu {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+h4 {
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    font-weight: 100;
+    float: right;
+    background-color: #973FCF;
+    color: white;
+    border-radius: .5rem;
+    padding: .25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Card body */
+.card-body h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.card-body p {
+    font-size: 14px;
+    color: #666;
+}
+
+.status-badges {
+    margin-top: 10px;
+}
+
+.badge-completed {
+    background-color: rgba(104, 178, 102, .5);
+    color: rgba(104, 178, 102, 1);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.badge-live {
+    background-color: rgba(255, 165, 0, .5);
+    color: #FFA500;
+    border-radius: 10px;
+    padding: 6px;
+    margin: 10px;
+}
+
+p {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.badge {
+    background-color: lightgray;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+/* Card footer */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .task-board {
+        grid-template-columns: 1fr; /* Stack cards in one column on small screens */
+    }
+}
+
+/* Medium screens (tablet landscape) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .task-board {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+    }
+}
+
+/* Large screens (desktops) */
+@media (min-width: 1025px) {
+    .task-board {
+        grid-template-columns: repeat(3, 1fr); /* Back to 3 columns for larger screens */
+    }
+}

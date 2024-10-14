@@ -1,0 +1,186 @@
+/* General App Layout */
+.app-container {
+    display: flex;
+    height: auto;
+    overflow-x: hidden;
+}
+
+/* Sidebar (taking 30% of the width) */
+.sidebar {
+width: 30%;
+background-color: #e5f1f8;
+padding: 20px;
+box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Content (starts after the 30% sidebar) */
+.main-content {
+width: 70%;
+padding: 20px;
+}
+
+/* General Header Styles */
+.app-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px 20px;
+background-color: white;
+border-bottom: 1px solid #ddd;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation buttons for larger screens */
+.nav-items {
+display: flex;
+gap: 20px;
+}
+
+.nav-btn {
+    padding: 8px 15px;
+    border: none;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    gap: 8px; 
+}
+
+.nav-btn:hover {
+    background-color: #9dcbfc; /* Change the background color on hover */
+    color: white; /* Change the text color on hover */
+    }
+.nav-btn.active {
+background-color: #8dc1f9;
+color: white;
+}
+
+/* Add Task Button */
+.add-task-btn {
+padding: 10px 20px;
+background-color: #8e44ad;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.add-task-btn:hover {
+    background-color: #49a4e9;
+    }
+
+
+.modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+}
+    
+    /* Modal Content */
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+    
+    /* Form styling */
+    .form-group {
+    margin-bottom: 15px;
+}
+    
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+    
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    }
+    
+.submit-button, .close-button {
+    background-color: #e9be49}
+
+/* Hamburger menu for mobile screens */
+.hamburger-menu {
+display: none;
+cursor: pointer;
+}
+
+.hamburger span {
+display: block;
+width: 25px;
+height: 3px;
+background-color: #333;
+margin: 4px 0;
+transition: 0.4s;
+}
+
+/* Hamburger animation when open */
+.hamburger.open span:nth-child(1) {
+transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.open span:nth-child(2) {
+opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Mobile menu (shown when hamburger is clicked) */
+.mobile-menu {
+display: flex;
+flex-direction: column;
+gap: 15px;
+padding: 10px 0;
+background-color: white;
+position: absolute;
+top: 60px;
+right: 20px;
+width: 200px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+.nav-items {
+    display: none; /* Hide buttons on smaller screens */
+}
+
+.hamburger-menu {
+    display: block; /* Show hamburger menu */
+}
+
+.add-task-btn {
+    display: none; /* Hide main add task button */
+}
+
+.mobile .add-task-btn {
+    display: block; /* Show add task button in mobile menu */
+}
+
+.sidebar {
+    display: none; /* Hide sidebar on smaller screens */
+}
+
+.main-content {
+    width: 100%; /* Content takes full width on mobile */
+}
+}
