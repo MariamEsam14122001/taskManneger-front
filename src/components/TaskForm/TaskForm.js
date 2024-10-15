@@ -3,8 +3,8 @@ import './TaskForm.css'; // Import the CSS file
 
 const TaskForm = () => {
 return (
-    <div className="container">
-        <div className="form-container">
+    /*<div className="container">
+        <div className="form-container">*/
             <form className="task-form">
                 <div className="header">
                     <h1>Add Task</h1>
@@ -15,6 +15,11 @@ return (
                 <div className="form-group task-name">
                     <label htmlFor="task-name">Name the Task</label>
                     <input type="text" id="task-name" placeholder="Task name" />
+                </div>
+                <div className='form-group task-description'>
+                    <label htmlFor='tasl-description'>Descripe the Task</label>
+                    <input type='text' id='task-description' placeholder='Task description'/>
+
                 </div>
 
                 <div className="form-group">
@@ -57,8 +62,8 @@ return (
             <button type="button" className="cancel-btn">Cancel</button>
           </div>
         </form>
-      </div>
-    </div>
+     /*</div>
+    </div>*/
   );
 };
 

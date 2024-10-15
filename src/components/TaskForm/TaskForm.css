@@ -16,22 +16,26 @@
     background: #fff;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
+}
+.task-form{
+    height: 100vh;
+    padding: 2rem;
 }
 .task-form h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 2rem;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 }
 
 .date {
-    font-size: 14px;
+    font-size: 1rem;
     color: #666;
 }
 

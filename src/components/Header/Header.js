@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Header.css'; // Importing the CSS
+import TaskForm from '../TaskForm/TaskForm';
 
 const Header = () => {
   // State for controlling mobile menu and modal visibility
@@ -63,7 +64,7 @@ return (
     {isModalOpen && (
     <div className="modal-overlay" onClick={toggleModal}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <h4>Add New Task</h4>
+        {/*<h4>Add New Task</h4>
         <form>
             <div className="form-group">
             <label>Task Name</label>
@@ -81,9 +82,11 @@ return (
             <button type="button" className="submit-button">Add Task</button>
             <button type="button" className="close-button" onClick={toggleModal}>Close</button>
             </div>
-        </form>
+        </form>*/}
+        <TaskForm/>
         </div>
     </div>
+    
     )}
 </header>
 );
