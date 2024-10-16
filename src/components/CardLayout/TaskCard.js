@@ -1,13 +1,44 @@
 import React from 'react';
+import  { useState } from 'react';
+
 import './TaskCard.css'; // Import the CSS file for styling
 
 const Card = ({ projectName, title, description, status }) => {
+    const [menuVisible, setMenuVisible] = useState(false); // State to toggle menu visibility
+
+    const handleMenuToggle = () => {
+      setMenuVisible(!menuVisible); // Toggle the menu
+    };
+
+const handleOptionClick = (option) => {
+    console.log(option);
+    // Add your logic here for delete, display, edit actions
+    if (option === 'delete') {
+    console.log('Delete action triggered');
+    } else if (option === 'display') {
+    console.log('Display action triggered');
+    } else if (option === 'edit') {
+    console.log('Edit action triggered');
+    }
+    setMenuVisible(false); // Hide menu after selection
+};
+
 return (
 <div className="card">
     <div className="card-header">
     <span className={`status-dot ${status}`}></span>
     <h4>{projectName}</h4>
-    <div className="three-dots-menu">⋮</div>
+    <div className="three-dots-menu" onClick={handleMenuToggle}>
+        ⋮
+          {/* Show the menu when state is true */}
+        {menuVisible && (
+            <div className="menu-options">
+            <div className="menu-option" onClick={() => handleOptionClick('delete')}>Delete</div>
+            <div className="menu-option" onClick={() => handleOptionClick('display')}>Display</div>
+            <div className="menu-option" onClick={() => handleOptionClick('edit')}>Edit</div>
+        </div>
+        )}
+    </div>
     </div>
     <div className="card-body">
     <h3>{title}</h3>
@@ -21,6 +52,8 @@ return (
 </div>
 );
 };
+
+
 
 const TaskBoard = () => {
 const cards = [

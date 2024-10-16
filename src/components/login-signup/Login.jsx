@@ -8,7 +8,7 @@ function Login(props) {
         e.preventDefault();
         console.log(email);
     }
-  
+
     return (
         <div className="formContainer">
                         <h2>Login</h2>
