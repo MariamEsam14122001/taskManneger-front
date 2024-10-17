@@ -57,10 +57,10 @@ return (
                     <span className="notification-info">Task reminder will be sent to you</span>
                 </div>
 
-          <div className="form-actions">
+            <div className="form-actions">
             <button type="submit" className="save-btn">Save</button>
             <button type="button" className="cancel-btn">Cancel</button>
-          </div>
+            </div>
         </form>
      /*</div>
     </div>*/

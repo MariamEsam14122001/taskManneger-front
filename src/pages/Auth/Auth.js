@@ -1,9 +1,9 @@
-/*import React, { useState } from "react";
-import Login from "./login-signup";
-import Register from "./register";
-import "./App.css";
+import React, { useState } from "react";
+import Login from "../../components/login-signup/Login"
+import Register from "../../components/login-signup/Register";
 
-function App() {
+
+function Auth() {
   const [currentForm, setCurrentForm] = useState('login');
 function toggleForm(formName){
   setCurrentForm(formName);
@@ -17,4 +17,4 @@ function toggleForm(formName){
   );
 }
 
-export default App;*/
+export default Auth;
