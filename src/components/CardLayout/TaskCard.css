@@ -1,11 +1,20 @@
 /* Main Task Board container */
+
 .task-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
     gap: 20px; /* Space between columns */
     padding: 30px;
-    margin-top: 5vh; /* 30% from the top of the page */
+    margin-top: 5vh;
     box-sizing: border-box;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%; /* Ensure columns take full height */
+    background-color: #f5f5f5; /* Light background for columns */
+    border-radius: 8px;
+    padding: 15px;
 }
 
 .column-header {
@@ -13,17 +22,26 @@
     font-weight: bold;
     text-align: center;
     padding: 10px;
-    }
-.column-header.todo {
-    border-bottom-color: purple;
-    }
-.column-header.inprogress {
-    border-bottom-color: orange;
-    }
-.column-header.done {
-    border-bottom-color: green;
-    }
+    margin-bottom: 15px;
+}
 
+.column-content {
+    flex-grow: 1;
+    overflow-y: auto; /* Allow scrolling within columns */
+}
+
+
+.column-header.todo {
+    border-bottom: 3px solid purple; /* Added border thickness for visibility */
+}
+
+.column-header.inprogress {
+    border-bottom: 3px solid orange;
+}
+
+.column-header.done {
+    border-bottom: 3px solid green;
+}
 
 /* Card styling */
 .card {
@@ -36,6 +54,8 @@
     justify-content: space-between;
     margin-bottom: 20px;
 }
+
+
 
 /* Card header with title and status dot */
 .card-header {
@@ -69,29 +89,30 @@
     position: relative;
     cursor: pointer;
     font-size: 20px;
-    }
+}
 
-  /* The dropdown menu */
+/* The dropdown menu */
 .menu-options {
-position: absolute;
-top: 25px;
-right: 0;
-background-color: white;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-padding: 10px;
-z-index: 100;
-border-radius: 5px;
-width: 120px;
+    position: absolute;
+    top: 25px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 100;
+    border-radius: 5px;
+    width: 120px;
 }
 
 .menu-option {
-padding: 8px 12px;
-cursor: pointer;
+    padding: 8px 12px;
+    cursor: pointer;
 }
 
 .menu-option:hover {
-background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
+
 h4 {
     margin-bottom: 1rem;
     margin-left: 1rem;
@@ -99,10 +120,8 @@ h4 {
     float: right;
     background-color: #973FCF;
     color: white;
-    border-radius: .5rem;
-    padding: .25rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    border-radius: 0.5rem;
+    padding: 0.25rem 1rem;
 }
 
 /* Card body */
@@ -122,7 +141,7 @@ h4 {
 }
 
 .badge-completed {
-    background-color: rgba(104, 178, 102, .5);
+    background-color: rgba(104, 178, 102, 0.5);
     color: rgba(104, 178, 102, 1);
     border-radius: 10px;
     padding: 5px;
@@ -130,7 +149,7 @@ h4 {
 }
 
 .badge-live {
-    background-color: rgba(255, 165, 0, .5);
+    background-color: rgba(255, 165, 0, 0.5);
     color: #FFA500;
     border-radius: 10px;
     padding: 6px;
@@ -159,11 +178,19 @@ p {
 }
 
 /* Responsive design for smaller screens */
+
 @media (max-width: 768px) {
     .task-board {
-        grid-template-columns: 1fr; /* Stack cards in one column on small screens */
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .column {
+        margin-bottom: 20px;
+        min-height: 300px; /* Set a minimum height for mobile */
     }
 }
+
 
 /* Medium screens (tablet landscape) */
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -176,5 +203,18 @@ p {
 @media (min-width: 1025px) {
     .task-board {
         grid-template-columns: repeat(3, 1fr); /* Back to 3 columns for larger screens */
+    }
+}
+
+/* Additional styling for cards to ensure responsiveness */
+.card {
+    flex: 1; /* Allow cards to grow and shrink */
+    min-width: 250px; /* Minimum width for cards */
+}
+
+/* Optional - Add spacing between cards */
+@media (max-width: 480px) {
+    .card {
+        margin-bottom: 15px; /* Decrease margin on very small screens */
     }
 }

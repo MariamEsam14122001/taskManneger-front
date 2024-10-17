@@ -6,7 +6,7 @@
     width: 100%; /* Take up the full width */
     max-width: 600px;
     margin: 20px 0;
-    padding: 10px 0;
+    padding: 10px; /* Added padding */
     box-sizing: border-box;
     flex-wrap: wrap; /* Allow elements to wrap if needed */
 }
@@ -33,10 +33,11 @@
     height: 8px;
     background-color: #f0f0f0;
     border-radius: 5px;
-    margin: 0 20px;
+    margin: 0 10px; /* Adjusted margin */
     position: relative;
     overflow: hidden;
     min-width: 150px; /* Ensure minimum width on small screens */
+    max-width: 100%; /* Ensure it doesn’t exceed the container */
 }
 
 /* The blue fill of the progress bar */
@@ -73,18 +74,22 @@
     }
 
     .progress-bar {
-        width: 50%;
+        width: 80%; /* Adjusted width */
         margin: 10px 0;
     }
 
     .good-job {
         margin-top: 10px;
     }
+
+    .task-meter {
+        font-size: 14px; /* Slightly decrease font size */
+    }
 }
 
 @media (max-width: 480px) {
     .task-meter {
-        font-size: 14px; /* Decrease font size on very small screens */
+        font-size: 12px; /* Further decrease font size */
         flex-direction: column; /* Stack labels on smaller screens */
         align-items: center;
     }
@@ -95,12 +100,12 @@
     }
 
     .progress-bar {
-        margin: 10px 0;
-        height: 6px; /* Slightly reduce the height for small screens */
+        width: 90%; /* Make it even wider */
+        height: 6px; /* Slightly reduce height */
     }
 
     .good-job-text {
-        font-size: 14px; /* Decrease font size for smaller devices */
+        font-size: 12px; /* Decrease font size */
     }
 
     .good-job {

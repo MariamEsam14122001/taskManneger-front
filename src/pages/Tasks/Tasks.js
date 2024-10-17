@@ -5,7 +5,6 @@ import CardLayout from "../../components/CardLayout/TaskCard";
 
 const Tasks = () => {
     return(
-
     <div className="app-container">
     <Sidebar />
     <main className="main-content">
