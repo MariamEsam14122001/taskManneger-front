@@ -58,8 +58,14 @@ font-size: 1.2rem;
 color: #333;
 }
 
-@media (max-width: 768px) {
-.task-stats-container {
-    flex-direction: column; /* Stack cards on smaller screens */
+
+@media screen (max-width:920){
+    .task-stats-container {
+        flex-direction: column; /* Stack cards on smaller screens */
+    
+    }
+
 }
-}
+
+
+
