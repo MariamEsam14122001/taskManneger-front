@@ -62,6 +62,7 @@
 /* Add Task Button */
 .add-task-btn {
     padding: 10px 20px;
+    margin:10px;
     background-color: #8e44ad;
     color: white;
     border: none;
@@ -96,8 +97,9 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+
 /* Hamburger menu for mobile screens */
-.hamburger-menu {
+/* .hamburger-menu {
     display: none;
     cursor: pointer;
 }
@@ -111,7 +113,6 @@
     transition: 0.4s;
 }
 
-/* Hamburger animation when open */
 .hamburger.open span:nth-child(1) {
     transform: rotate(-45deg) translate(-5px, 6px);
 }
@@ -122,7 +123,7 @@
 
 .hamburger.open span:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
-}
+} */
 
 /* Mobile menu (shown when hamburger is clicked) */
 .mobile-menu {
@@ -153,15 +154,15 @@
 @media (max-width: 768px) {
     /* Adjust layout for smaller screens */
     .nav-items {
-        display: none; /* Hide buttons on smaller screens */
+        display: auto; /* Hide buttons on smaller screens */
     }
 
     .hamburger-menu {
-        display: block; /* Show hamburger menu */
+        display: none; /* Show hamburger menu */
     }
 
     .add-task-btn {
-        display: none; /* Hide main add task button */
+        display: auto; /* Hide main add task button */
     }
 
     .mobile .add-task-btn {
