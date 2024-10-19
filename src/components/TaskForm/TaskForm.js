@@ -1,161 +1,202 @@
-import React, { useState } from 'react';
-import './TaskForm.css'; // Import the CSS file
+import React, { useState } from "react";
+import axios from "axios";
+import { useAuth } from "../../Context/AuthContext";
+import "./TaskForm.css";
 
-const TaskForm = () => {
-  // State for form visibility
-    const [isVisible, setIsVisible] = useState(true);
+const TaskForm = ({ mode = "add", taskData = {}, onTaskSubmit, onCancel }) => {
+  const [taskName, setTaskName] = useState(taskData.name || "");
+  const [projectName, setProjectName] = useState(taskData.projectName || "");
+  const [priority, setPriority] = useState(taskData.priority || "low"); // Default priority
+  const [dueDate, setDueDate] = useState(taskData.dueDate || "");
+  const [status, setStatus] = useState(taskData.status || "to do"); // Default status
+  const [errors, setErrors] = useState({});
+  const { token } = useAuth();
 
-  // State for form inputs
-    const [taskName, setTaskName] = useState('');
-    const [taskDescription, setTaskDescription] = useState('');
-    const [projectName, setProjectName] = useState('');
-    const [priority, setPriority] = useState('Critical');
-    const [dueDate, setDueDate] = useState('');
-    const [startTime, setStartTime] = useState('11:00');
-    const [endTime, setEndTime] = useState('13:00');
-    const [notifications, setNotifications] = useState(false);
-    const [errors, setErrors] = useState({});
-
-  // Validate inputs before form submission
-    const validateForm = () => {
+  // Handle form validation
+  const validateForm = () => {
     const newErrors = {};
+    if (!taskName) newErrors.taskName = "Task name is required";
+    if (!projectName) newErrors.projectName = "Please select a project";
+    if (!dueDate) newErrors.dueDate = "Please select a due date";
 
-    if (!taskName) newErrors.taskName = 'Task name is required';
-    if (!taskDescription) newErrors.taskDescription = 'Task description is required';
-    if (!projectName) newErrors.projectName = 'Please select a project';
-    if (!dueDate) newErrors.dueDate = 'Please select a due date';
-    if (startTime >= endTime) newErrors.time = 'End time must be later than start time';
+    const validPriorities = ["critical", "low", "high"];
+    if (!validPriorities.includes(priority))
+      newErrors.priority = "Invalid priority";
+
+    const validStatuses = ["in progress", "done", "to do"];
+    if (!validStatuses.includes(status)) newErrors.status = "Invalid status";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-    };
+  };
 
   // Handle form submission
-    const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-        alert('Task saved successfully!');
+      const newTaskData = {
+        name: taskName,
+        projectName,
+        priority,
+        dueDate,
+        status, // Make sure to include status
+        _id: taskData._id, // Use taskData._id for update
+      };
+
+      if (mode === "add") {
+        // Add task
+        try {
+          const response = await axios.post(
+            "http://localhost:5000/api/tasks/add",
+            newTaskData, // Use newTaskData instead of taskData
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          alert("Task added successfully!");
+          console.log("Response:", response.data);
+          if (onTaskSubmit) onTaskSubmit();
+        } catch (error) {
+          console.error(
+            "Error adding task:",
+            error.response?.data || error.message
+          );
+          alert(
+            "Error adding task: " +
+              (error.response?.data?.message || error.message)
+          );
+        }
+      } else if (mode === "edit") {
+        // Update task
+        try {
+          const response = await axios.put(
+            `http://localhost:5000/api/tasks/update/${taskData._id}`, // Use taskData._id for update
+            newTaskData, // Use newTaskData instead of taskData
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          alert("Task updated successfully!");
+          console.log("Response:", response.data);
+          if (onTaskSubmit) onTaskSubmit();
+        } catch (error) {
+          console.error(
+            "Error updating task:",
+            error.response?.data || error.message
+          );
+          alert(
+            "Error updating task: " +
+              (error.response?.data?.message || error.message)
+          );
+        }
+      }
     }
-    };
+  };
 
-  // Handle close button click
-    const handleClose = () => {
-    setIsVisible(false); // Hide the form
-    };
-
-  // Return nothing if the form is not visible
-    if (!isVisible) return null;
-    return (
+  return (
     <form className="task-form" onSubmit={handleSubmit}>
-        <div className="header">
-        <h1>Add Task</h1>
-        <span className="date">Today 02/02/2022</span>
-        <button type="button" className="close-btn" onClick={handleClose}>&times;</button>
-        </div>
+      <div className="header">
+        <h1>
+          {mode === "add"
+            ? "Add Task"
+            : mode === "edit"
+            ? "Edit Task"
+            : "Task Details"}
+        </h1>
+        <button type="button" className="close-btn" onClick={onCancel}>
+          &times;
+        </button>
+      </div>
 
-        <div className="form-group task-name">
+      <div className="form-group task-name">
         <label htmlFor="task-name">Name the Task</label>
         <input
-            type="text"
-            id="task-name"
-            placeholder="Task name"
-            value={taskName}
-            onChange={(e) => setTaskName(e.target.value)}
+          type="text"
+          id="task-name"
+          placeholder="Task name"
+          value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}
+          disabled={mode === "view"} // Disable input if view mode
         />
         {errors.taskName && <span className="error">{errors.taskName}</span>}
-        </div>
+      </div>
 
-        <div className="form-group task-description">
-        <label htmlFor="task-description">Describe the Task</label>
+      {/* Project Name */}
+      <div className="form-group project-name">
+        <label htmlFor="project-name">Project</label>
         <input
-            type="text"
-            id="task-description"
-            placeholder="Task description"
-            value={taskDescription}
-            onChange={(e) => setTaskDescription(e.target.value)}
+          type="text"
+          id="project-name"
+          placeholder="Project name"
+          value={projectName}
+          onChange={(e) => setProjectName(e.target.value)}
+          disabled={mode === "view"}
         />
-        {errors.taskDescription && <span className="error">{errors.taskDescription}</span>}
-        </div>
+        {errors.projectName && (
+          <span className="error">{errors.projectName}</span>
+        )}
+      </div>
 
-        <div className="form-group">
-        <label htmlFor="project-name">Choose Project</label>
+      {/* Priority */}
+      <div className="form-group priority">
+        <label htmlFor="priority">Priority:</label>
         <select
-            id="project-name"
-            name="project-name"
-            value={projectName}
-            onChange={(e) => setProjectName(e.target.value)}
+          id="priority"
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)}
+          disabled={mode === "view"}
         >
-            <option value="">Select Project</option>
-            <option>Project Alpha</option>
-            <option>Project Beta</option>
+          <option value="critical">Critical</option>
+          <option value="high">High</option>
+          <option value="low">Low</option>
         </select>
-        {errors.projectName && <span className="error">{errors.projectName}</span>}
-        </div>
+      </div>
 
-        <div className="form-group">
-        <label htmlFor="priority">Task Priority</label>
-        <select
-            id="priority"
-            name="priority"
-            value={priority}
-            onChange={(e) => setPriority(e.target.value)}
-        >
-            <option>Critical</option>
-            <option>High</option>
-            <option>Low</option>
-        </select>
-        </div>
-
-        <div className="form-group">
-        <label htmlFor="due-date">Due Date/Time</label>
+      {/* Due Date */}
+      <div className="form-group due-date">
+        <label htmlFor="due-date">Due Date:</label>
         <input
-            type="date"
-            id="due-date"
-            name="due-date"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
+          type="date"
+          id="due-date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+          disabled={mode === "view"}
         />
         {errors.dueDate && <span className="error">{errors.dueDate}</span>}
-        <div className="time-inputs">
-            <input
-            type="time"
-            id="start-time"
-            name="start-time"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
-            />
-            <span>-</span>
-            <input
-            type="time"
-            id="end-time"
-            name="end-time"
-            value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
-            />
-        </div>
-        {errors.time && <span className="error">{errors.time}</span>}
-        </div>
+      </div>
 
-        <div className="form-group">
-        <label htmlFor="notifications">Activate Notifications</label>
-        <label className="switch">
-            <input
-            type="checkbox"
-            id="notifications"
-            checked={notifications}
-            onChange={(e) => setNotifications(e.target.checked)}
-            />
-            <span className="slider round"></span>
-        </label>
-        <span className="notification-info">Task reminder will be sent to you</span>
-        </div>
+      {/* Status */}
+      <div className="form-group status">
+        <label htmlFor="status">Status:</label>
+        <select
+          id="status"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          disabled={mode === "view"}
+        >
+          <option value="in progress">In Progress</option>
+          <option value="done">Done</option>
+          <option value="to do">To Do</option>
+        </select>
+      </div>
 
+      {/* Form actions */}
+      {mode !== "view" && (
         <div className="form-actions">
-        <button type="submit" className="save-btn">Save</button>
-        <button type="button" className="cancel-btn">Cancel</button>
+          <button type="submit" className="save-btn">
+            {mode === "add" ? "Save Task" : "Update Task"}
+          </button>
+          <button type="button" className="cancel-btn" onClick={onCancel}>
+            Cancel
+          </button>
         </div>
+      )}
     </form>
-    );
+  );
 };
 
 export default TaskForm;

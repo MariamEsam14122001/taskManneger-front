@@ -1,47 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import UserInfo from "../userinfo/UserInfo";
 import TodoList from "../todolist/ToDoList";
+import { useAuth } from "../../Context/AuthContext";
 
 const Sidebar = () => {
-  const tasks = [
-    {
-      id: 1,
-      time: "10:00 AM",
-      number: 1,
-      projectName: "Project Alpha",
-      title: "Brainstorming",
-      details:
-        "Brainstorming brings team members' diverse experience into play.",
-      critical: "low",
-      progress: "Completed",
-    },
-    {
-      id: 2,
-      time: "11:00 AM",
-      number: 2,
-      projectName: "Project Beta",
-      title: "Design Review",
-      details: "Review the design mockups and gather feedback.",
-      critical: "medium",
-      progress: "In Progress",
-    },
-    {
-      id: 3,
-      time: "12:00 PM",
-      number: 3,
-      projectName: "Project Gamma",
-      title: "Team Sync",
-      details: "Discuss project updates and team priorities.",
-      critical: "high",
-      progress: "Pending",
-    },
-  ];
+  const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState(null);
+  const { token } = useAuth(); // Ensure this is at the top level
+
+  const fetchTodaysTasks = async () => {
+    const today = new Date().toISOString().split("T")[0];
+
+    if (!token) {
+      setError("No token found, please log in.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/tasks/today", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ date: today }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setTasks(data.data);
+        setError(null);
+      } else {
+        setError(data.message);
+        setTasks([]);
+      }
+    } catch (err) {
+      setError("An error occurred while fetching tasks.");
+      console.error(err);
+    }
+  };
+
+  // Fetch today's tasks when the component mounts
+  useEffect(() => {
+    fetchTodaysTasks();
+  }, [token]); // Add token as a dependency if it changes
+
   return (
     <div id="sidebar">
       <UserInfo />
       <TodoList tasks={tasks} />
+      {error && <p style={{ color: "red" }}>{error}</p>}{" "}
+      {/* Display error if present */}
     </div>
   );
 };
+
 export default Sidebar;

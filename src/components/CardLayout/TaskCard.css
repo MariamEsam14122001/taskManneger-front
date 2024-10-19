@@ -1,220 +1,126 @@
-/* Main Task Board container */
-
-.task-board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
-    gap: 20px; /* Space between columns */
-    padding: 30px;
-    margin-top: 5vh;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
-.column {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%; /* Ensure columns take full height */
-    background-color: #f5f5f5; /* Light background for columns */
-    border-radius: 8px;
-    padding: 15px;
-}
 
-.column-header {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 15px;
-}
-
-.column-content {
-    flex-grow: 1;
-    overflow-y: auto; /* Allow scrolling within columns */
-}
-
-
-.column-header.todo {
-    border-bottom: 3px solid purple; /* Added border thickness for visibility */
-}
-
-.column-header.inprogress {
-    border-bottom: 3px solid orange;
-}
-
-.column-header.done {
-    border-bottom: 3px solid green;
-}
-
-/* Card styling */
-.card {
-    background-color: rgb(250, 244, 244);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: 20px;
 }
 
-
-
-/* Card header with title and status dot */
-.card-header {
+.task-board {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+    gap: 20px;
+    /*max-width: 1200px;*/
+    margin: 0 auto;
+    flex-wrap: wrap; /* Ensure that columns wrap on smaller screens */
 }
 
-.status-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 10px;
+.column {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box; /* Ensure padding doesn't add to the width */
+    margin-bottom: 20px; /* Add some spacing between columns on small screens */
 }
 
-.status-dot.todo {
-    background-color: purple;
-}
-
-.status-dot.inprogress {
-    background-color: orange;
-}
-
-.status-dot.done {
-    background-color: green;
-}
-
-/* Three dots menu */
-.three-dots-menu {
-    position: relative;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-/* The dropdown menu */
-.menu-options {
-    position: absolute;
-    top: 25px;
-    right: 0;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    z-index: 100;
-    border-radius: 5px;
-    width: 120px;
-}
-
-.menu-option {
-    padding: 8px 12px;
-    cursor: pointer;
-}
-
-.menu-option:hover {
-    background-color: #f0f0f0;
-}
-
-h4 {
-    margin-bottom: 1rem;
-    margin-left: 1rem;
-    font-weight: 100;
-    float: right;
-    background-color: #973FCF;
-    color: white;
-    border-radius: 0.5rem;
-    padding: 0.25rem 1rem;
-}
-
-/* Card body */
-.card-body h3 {
+.column h2 {
     font-size: 18px;
-    margin: 10px 0;
-    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
 }
 
-.card-body p {
-    font-size: 14px;
+.task-count {
     color: #666;
 }
 
-.status-badges {
-    margin-top: 10px;
+.task-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    width: 100%; /* Ensure cards take full width of the container */
+    box-sizing: border-box; /* Ensure padding doesn't add to the width */
 }
 
-.badge-completed {
-    background-color: rgba(104, 178, 102, 0.5);
-    color: rgba(104, 178, 102, 1);
-    border-radius: 10px;
-    padding: 5px;
-    margin: 10px;
-}
-
-.badge-live {
-    background-color: rgba(255, 165, 0, 0.5);
-    color: #FFA500;
-    border-radius: 10px;
-    padding: 6px;
-    margin: 10px;
-}
-
-p {
-    margin-bottom: 10px;
-    padding: 10px;
-}
-
-.badge {
-    background-color: lightgray;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    margin-right: 5px;
-}
-
-/* Card footer */
-.card-footer {
+.task-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 }
 
-/* Responsive design for smaller screens */
+.project-label {
+    background-color: #6b5b95;
+    color: #fff;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 12px;
+}
 
+.task-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #888;
+}
+
+
+.priority {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.low {
+    background-color: #ffeb3b;
+    color: #333;
+}
+
+.status {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.completed {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .task-board {
-        grid-template-columns: 1fr;
-        height: auto;
+        flex-direction: column; /* Stacks the columns vertically on smaller screens */
     }
-    
+
     .column {
-        margin-bottom: 20px;
-        min-height: 300px; /* Set a minimum height for mobile */
+        max-width: 100%; /* Makes sure the columns are full width on small screens */
+    }
+
+    .task-card {
+        width: 100%; /* Ensures the task cards take full width of their parent */
     }
 }
 
-
-/* Medium screens (tablet landscape) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .task-board {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
-    }
-}
-
-/* Large screens (desktops) */
-@media (min-width: 1025px) {
-    .task-board {
-        grid-template-columns: repeat(3, 1fr); /* Back to 3 columns for larger screens */
-    }
-}
-
-/* Additional styling for cards to ensure responsiveness */
-.card {
-    flex: 1; /* Allow cards to grow and shrink */
-    min-width: 250px; /* Minimum width for cards */
-}
-
-/* Optional - Add spacing between cards */
 @media (max-width: 480px) {
-    .card {
-        margin-bottom: 15px; /* Decrease margin on very small screens */
+    .task-footer {
+        flex-direction: column; /* Stacks footer items vertically on small screens */
+        align-items: flex-start;
+    }
+
+    .comments, .files {
+        margin-top: 5px;
     }
 }

@@ -7,14 +7,20 @@ const TodoList = ({ tasks }) => {
     <div id="list-container">
       <div>
         <h3 style={{ display: "inline-block" }}>My To Do List</h3>
-        <p id="date">Today 02/02/2022</p>
+        <p id="date">{new Date().toLocaleDateString()}</p>{" "}
+       
       </div>
       <div id="list">
-        {tasks.map((task) => (
-          <TodoItem key={task.id} {...task} />
-        ))}
+        {tasks.length > 0 ? (
+          tasks.map((task, index) => (
+            <TodoItem key={task._id} {...task} index={index} />
+          ))
+        ) : (
+          <p>No tasks available for today.</p>
+        )}
       </div>
     </div>
   );
 };
+
 export default TodoList;
