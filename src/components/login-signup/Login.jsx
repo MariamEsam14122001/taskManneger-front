@@ -1,29 +1,22 @@
 import React, { useState } from "react";
-import { useAuth } from "../../Context/AuthContext.js"; // Import your Auth context
+import { useAuth } from "../../Context/AuthContext.js";
 import "./App.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login(props) {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [error, setError] = useState(null); // To store error messages
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { login } = useAuth(); // Get the login function from the Auth context
+  const { login } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // Create the login payload
-    const loginData = { email, password: pass };
-
     try {
-      // Use the login function from AuthContext
       await login(email, pass);
-
-      // Successful login - redirect to a protected route
       navigate("/dashboard");
     } catch (error) {
-      // Handle error response
       setError(
         error.response?.data?.message || "Login failed. Please try again."
       );
@@ -34,7 +27,7 @@ function Login(props) {
   return (
     <div className="formContainer">
       <h2>Login</h2>
-      {error && <p className="error">{error}</p>} {/* Display errors if any */}
+      {error && <p className="error">{error}</p>}
       <form className="loginForm" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -58,9 +51,10 @@ function Login(props) {
       </form>
       <button
         className="linkBtn"
-        onClick={() => props.onFormSwitch("register")}
       >
+        <Link to="/register">
         Do not have an Account? Sign up here
+        </Link>
       </button>
     </div>
   );

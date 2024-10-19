@@ -4,6 +4,7 @@ import TaskForm from "../TaskForm/TaskForm"; // Make sure this is correctly impo
 import { useAuth } from "../../Context/AuthContext";
 import "./TaskCard.css";
 
+
 const TaskCard = ({
   id,
   projectLabel,
@@ -128,8 +129,8 @@ const TaskCard = ({
           <div className="modal-content">
             <TaskForm
               mode={taskMode} // "view" or "edit"
-              taskData={task} // Pre-filled task data
-              onTaskSubmit={handleTaskSubmit} // Pass the submit handler
+              taskData={task} 
+              onTaskSubmit={handleTaskSubmit} 
               onCancel={() => setIsModalOpen(false)} // Close modal on cancel
             />
           </div>

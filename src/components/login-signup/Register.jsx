@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 function Register(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,22 +13,19 @@ function Register(props) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // Create the registration payload
     const registerData = { name, email, password: pass };
 
     try {
-      // Send a POST request to the registration API using axios
       const response = await axios.post(
-        "http://localhost:5000/api/users/signup ",
+        "http://localhost:5000/api/users/signup",
         registerData
       );
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         console.log("Registration successful:", response.data);
-        navigate("/login");
+        navigate("/");
       }
     } catch (error) {
-      // Handle error response
       setError(
         error.response?.data?.message ||
           "Registration failed. Please try again."
@@ -39,7 +37,7 @@ function Register(props) {
   return (
     <div className="formContainer">
       <h2>Register</h2>
-      {error && <p className="error">{error}</p>} {/* Display errors if any */}
+      {error && <p className="error">{error}</p>}
       <form className="registerForm" onSubmit={handleSubmit}>
         <label htmlFor="name">Fullname</label>
         <input
@@ -70,8 +68,8 @@ function Register(props) {
         />
         <button type="submit">Register</button>
       </form>
-      <button onClick={() => props.onFormSwitch("login")}>
-        Already have an account? Log in here
+      <button>
+        <Link to="/">Already have an account? Log in here</Link>
       </button>
     </div>
   );

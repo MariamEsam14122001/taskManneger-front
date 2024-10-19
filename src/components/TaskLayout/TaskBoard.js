@@ -1,4 +1,3 @@
-// TaskBoard.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TaskColumn from "./TaskColumn";
@@ -17,7 +16,7 @@ const TaskBoard = () => {
     try {
       if (!token) {
         console.warn("No token found. Cannot fetch tasks.");
-        return;
+        return [];
       }
       const response = await axios.get(
         `http://localhost:5000/api/tasks/status/${status}`,
@@ -29,7 +28,12 @@ const TaskBoard = () => {
       );
       return response.data;
     } catch (err) {
-      setError(err.message);
+      // If a 404 is returned, resolve with an empty array
+      if (err.response && err.response.status === 404) {
+        console.warn(`No tasks found for status: ${status}`);
+        return []; // Return empty array if 404
+      }
+      setError(err.message); // For other errors, set the error message
       console.error(err);
     }
   };

@@ -2,14 +2,16 @@
 
 import React from "react";
 import Header from "../Header/Header";
-import Sidebar from "../sidebar/SideBar"; 
+import Sidebar from "../sidebar/SideBar";
 
 const Layout = ({ children }) => {
   return (
-    <div className="layout">
-      <Header />
+    <div className="app-container">
       <Sidebar />
-      <main>{children}</main>
+      <main className="main-content">
+        <Header />
+        {children}
+      </main>
     </div>
   );
 };
