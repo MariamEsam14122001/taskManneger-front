@@ -1,7 +1,8 @@
 // src/components/Dashboard.js
+// src/components/Dashboard.js
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import { LineChart, Line, BarChart, Bar, PieChart, Pie, Tooltip, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Tooltip, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts';
 
 const Dashboard = () => {
   // Sample data
@@ -25,15 +26,17 @@ const Dashboard = () => {
           <Card>
             <Card.Body>
               <h5>Tasks Over Time</h5>
-              <LineChart width={300} height={200} data={data}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="tasks" stroke="#8884d8" />
-                <Line type="monotone" dataKey="completed" stroke="#82ca9d" />
-              </LineChart>
+              <ResponsiveContainer width="100%" height={200}>
+                <LineChart data={data}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="tasks" stroke="#8884d8" />
+                  <Line type="monotone" dataKey="completed" stroke="#82ca9d" />
+                </LineChart>
+              </ResponsiveContainer>
             </Card.Body>
           </Card>
         </Col>
@@ -43,15 +46,17 @@ const Dashboard = () => {
           <Card>
             <Card.Body>
               <h5>Tasks Completed vs Created</h5>
-              <BarChart width={300} height={200} data={data}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="tasks" fill="#8884d8" />
-                <Bar dataKey="completed" fill="#82ca9d" />
-              </BarChart>
+              <ResponsiveContainer width="100%" height={200}>
+                <BarChart data={data}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="tasks" fill="#8884d8" />
+                  <Bar dataKey="completed" fill="#82ca9d" />
+                </BarChart>
+              </ResponsiveContainer>
             </Card.Body>
           </Card>
         </Col>
@@ -61,10 +66,12 @@ const Dashboard = () => {
           <Card>
             <Card.Body>
               <h5>Task Breakdown</h5>
-              <PieChart width={300} height={200}>
-                <Pie data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60} fill="#82ca9d" label />
-                <Tooltip />
-              </PieChart>
+              <ResponsiveContainer width="100%" height={200}>
+                <PieChart>
+                  <Pie data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60} fill="#82ca9d" label />
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
             </Card.Body>
           </Card>
         </Col>
