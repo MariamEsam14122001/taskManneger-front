@@ -66,9 +66,9 @@ function Register(props) {
           id="password"
           name="password"
         />
-        <button type="submit">Register</button>
+        <button className="submit" type="submit">Register</button>
       </form>
-      <button>
+      <button className="linkBtn">
         <Link to="/">Already have an account? Log in here</Link>
       </button>
     </div>
