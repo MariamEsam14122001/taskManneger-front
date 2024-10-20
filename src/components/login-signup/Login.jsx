@@ -47,7 +47,7 @@ function Login(props) {
           id="password"
           name="password"
         />
-        <button type="submit">Log In</button>
+        <button className="submit" type="submit">Log In</button>
       </form>
       <button
         className="linkBtn"
@@ -55,7 +55,7 @@ function Login(props) {
         <Link to="/register">
         Do not have an Account? Sign up here
         </Link>
-      </button>
+      </button>  
     </div>
   );
 }

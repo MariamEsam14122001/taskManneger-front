@@ -100,14 +100,9 @@ function Register(props) {
           id="password"
           name="password"
         />
-        {validationErrors.password && (
-          <p className="error">{validationErrors.password}</p>
-        )}
-
-        <button className="submit" type="submit">Register</button>
+        <button type="submit">Register</button>
       </form>
-
-      <button className="linkBtn">
+      <button>
         <Link to="/">Already have an account? Log in here</Link>
       </button>
     </div>

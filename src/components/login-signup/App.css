@@ -75,10 +75,5 @@ input{
 background: none;
 color: rgb(255, 255, 255);
 text-decoration: underline;
-margin-bottom: 20px;
-border: none;
-}
-.error {
-    color: red;
-    font-size: 0.9rem;
+
 }
