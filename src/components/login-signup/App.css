@@ -11,7 +11,7 @@ top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 width: 30%;
-height: 65%;
+height: 75%;
 color: rgb(0, 0, 0);
 border-radius: 25px;
 min-width: 350px
@@ -53,8 +53,8 @@ label{
 
 input{
 
-    margin:0.5rem ;
-    padding:1rem;
+    margin:0.2rem ;
+    padding:0.25rem;
     border:none;
     border-radius: 10px;
 
@@ -62,18 +62,23 @@ input{
 .submit{
     border: none;
     background-color: #6b5b95;;
-    padding: 15px;
+    padding: 0.5rem;
     border-radius: 10px;
     cursor: pointer;
     color: #052e66;
-    margin-bottom: 30px;
+    margin-bottom: 0.2rem;
     margin-top:30px;
     
 }
 .linkBtn{
 
-background: none;
-color: rgb(255, 255, 255);
+background-color: none;
+
 text-decoration: underline;
 
+
+}
+.error{
+    color: red;
+    font-size: smaller;
 }
