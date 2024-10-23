@@ -71,14 +71,14 @@ input{
     
 }
 .linkBtn{
-
-background-color: none;
+border: none;
+background-color: #a0b4d1;
 
 text-decoration: underline;
 
 
 }
 .error{
-    color: red;
-    font-size: smaller;
+    color: rgb(126, 35, 35);
+    font-size: small;
 }

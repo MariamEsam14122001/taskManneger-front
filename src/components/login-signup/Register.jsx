@@ -149,8 +149,8 @@ function Register(props) {
         )}
 
         <button type="submit" className="submit">Register</button>
-        <button>
-        <Link to="/" className="linkBtn">Already have an account? Log in here</Link>
+      <button className="linkBtn">
+        <Link to="/" >Already have an account? Log in here</Link>
       </button>
         
       </form>
